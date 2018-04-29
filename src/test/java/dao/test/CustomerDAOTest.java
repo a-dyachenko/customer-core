@@ -2,8 +2,6 @@ package dao.test;
 
 import java.util.ArrayList;
 
-import javax.persistence.Transient;
-
 import org.junit.Assert;
 import org.junit.Test;
 
