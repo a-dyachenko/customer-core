@@ -6,18 +6,18 @@ import org.junit.Before;
 import customers_core.dao.CommentDAO;
 import customers_core.dao.CustomerDAO;
 import customers_core.dao.CustomerStatusDAO;
-import customers_core.dao.HibernateSessionProvider;
+import customers_core.dao.CustomerCoreSessionProvider;
 
 public class BaseTest {
 
-	CustomerStatusDAO customerStatusDAO;
-	CustomerDAO customerDAO;
-	CommentDAO commentDAO;
-	HibernateSessionProvider sessionProvider;
+	protected CustomerStatusDAO customerStatusDAO;
+	protected CustomerDAO customerDAO;
+	protected CommentDAO commentDAO;
+	protected CustomerCoreSessionProvider sessionProvider;
 
 	@Before
 	public void init() {
-		sessionProvider = new HibernateSessionProvider();
+		sessionProvider = new CustomerCoreSessionProvider();
 		customerStatusDAO = new CustomerStatusDAO(sessionProvider);
 		customerDAO = new CustomerDAO(sessionProvider);
 		commentDAO = new CommentDAO(sessionProvider); 

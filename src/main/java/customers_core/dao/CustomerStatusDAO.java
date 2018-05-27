@@ -10,11 +10,12 @@ import customers_core.db.CustomerStatusDB;
 
 public class CustomerStatusDAO extends DAOService<CustomerStatusDB> {
 
+	private static final String FIELD_STATUS_NAME = "statusName";
 	private static final int STATUS_PROSPECTIVE = 1;
 	private static final int STATUS_CURRENT = 2;
 	private static final int STATUS_NONACTIVE = 3;
 
-	public CustomerStatusDAO(HibernateSessionProvider sessionProvider) {
+	public CustomerStatusDAO(CustomerCoreSessionProvider sessionProvider) {
 		super(sessionProvider, CustomerStatusDB.class);
 	}
 
@@ -22,7 +23,7 @@ public class CustomerStatusDAO extends DAOService<CustomerStatusDB> {
 
 		CriteriaQuery<CustomerStatusDB> criteriaQuery = getCriteriaBuilder().createQuery(CustomerStatusDB.class);
 		Root<CustomerStatusDB> root = criteriaQuery.from(CustomerStatusDB.class);
-		criteriaQuery.select(root).where(getCriteriaBuilder().equal(root.get("statusName"), statusName));
+		criteriaQuery.select(root).where(getCriteriaBuilder().equal(root.get(FIELD_STATUS_NAME), statusName));
 		Query query = getCurrentSession().createQuery(criteriaQuery);
 		CustomerStatusDB customerStatus = (CustomerStatusDB) query.getSingleResult();
 

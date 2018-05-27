@@ -13,7 +13,10 @@ import customers_core.db.CustomerDB;
 
 public class CommentDAO extends DAOService<CommentDB> {
 
-	public CommentDAO(HibernateSessionProvider sessionProvider) {
+	private static final String FIELD_CUSTOMER = "customer";
+	private static final String FIELD_CREATED = "created";
+
+	public CommentDAO(CustomerCoreSessionProvider sessionProvider) {
 		super(sessionProvider, CommentDB.class);
 	}
 
@@ -24,9 +27,9 @@ public class CommentDAO extends DAOService<CommentDB> {
 		 
 		List<Order> orderList = new ArrayList<>(); 
 
-		orderList.add(getCriteriaBuilder().desc(root.get("created"))); 
+		orderList.add(getCriteriaBuilder().desc(root.get(FIELD_CREATED))); 
 		
-		criteriaQuery.select(root).where(getCriteriaBuilder().equal(root.get("customer"), customer))
+		criteriaQuery.select(root).where(getCriteriaBuilder().equal(root.get(FIELD_CUSTOMER), customer))
 				.orderBy(orderList);
 		 
 		Query query = getCurrentSession().createQuery(criteriaQuery);

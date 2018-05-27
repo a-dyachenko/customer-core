@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import customers_core.dao.CommentDAO;
 import customers_core.dao.CustomerDAO;
 import customers_core.dao.CustomerStatusDAO;
-import customers_core.dao.HibernateSessionProvider;
+import customers_core.dao.CustomerCoreSessionProvider;
 import customers_core.db.CommentDB;
 import customers_core.db.CustomerDB;
 import customers_core.db.CustomerStatusDB;
@@ -22,7 +22,7 @@ public class CustomerDataService {
 
 	public CustomerDataService() {
 
-		HibernateSessionProvider sessionProvider = new HibernateSessionProvider();
+		CustomerCoreSessionProvider sessionProvider = new CustomerCoreSessionProvider();
 		commentDAO = new CommentDAO(sessionProvider);
 		customerStatusDAO = new CustomerStatusDAO(sessionProvider);
 		customerDAO = new CustomerDAO(sessionProvider);
