@@ -16,7 +16,7 @@ public class CommentDAO extends DAOService<CommentDB> {
 	private static final String FIELD_CUSTOMER = "customer";
 	private static final String FIELD_CREATED = "created";
 
-	public CommentDAO(CustomerCoreSessionProvider sessionProvider) {
+	public CommentDAO(HibernateSessionProvider sessionProvider) {
 		super(sessionProvider, CommentDB.class);
 	}
 

@@ -9,10 +9,10 @@ import customers_core.db.BaseObjectDB;
 public class DAOService<DAOClass extends BaseObjectDB> {
 
 	Class<DAOClass> cl;
-	private CustomerCoreSessionProvider sessionProvider;
+	private HibernateSessionProvider sessionProvider;
 	private CriteriaBuilder criteriaBuilder;
 
-	public DAOService(CustomerCoreSessionProvider sessionProvider, Class<DAOClass> cl) {
+	public DAOService(HibernateSessionProvider sessionProvider, Class<DAOClass> cl) {
 		this.sessionProvider = sessionProvider;
 		this.cl = cl;
 	}

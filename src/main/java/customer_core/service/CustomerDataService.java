@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import customers_core.dao.CommentDAO;
 import customers_core.dao.CustomerDAO;
 import customers_core.dao.CustomerStatusDAO;
+import customers_core.dao.HibernateSessionProvider;
 import customers_core.dao.CustomerCoreSessionProvider;
 import customers_core.db.CommentDB;
 import customers_core.db.CustomerDB;
@@ -20,9 +21,23 @@ public class CustomerDataService {
 	private CustomerStatusDAO customerStatusDAO;
 	private CommentDAO commentDAO;
 
+	/**
+	 * default constructor
+	 */
 	public CustomerDataService() {
 
 		CustomerCoreSessionProvider sessionProvider = new CustomerCoreSessionProvider();
+		commentDAO = new CommentDAO(sessionProvider);
+		customerStatusDAO = new CustomerStatusDAO(sessionProvider);
+		customerDAO = new CustomerDAO(sessionProvider);
+	}
+	
+	/**
+	 * constructor for custom session provider
+	 * @param sessionProvider
+	 */
+	public CustomerDataService(HibernateSessionProvider sessionProvider) {
+ 
 		commentDAO = new CommentDAO(sessionProvider);
 		customerStatusDAO = new CustomerStatusDAO(sessionProvider);
 		customerDAO = new CustomerDAO(sessionProvider);

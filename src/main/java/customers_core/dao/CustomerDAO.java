@@ -10,7 +10,7 @@ import customers_core.db.CustomerDB;
 
 public class CustomerDAO extends DAOService<CustomerDB> {
 
-	public CustomerDAO(CustomerCoreSessionProvider sessionProvider) {
+	public CustomerDAO(HibernateSessionProvider sessionProvider) {
 		super(sessionProvider, CustomerDB.class);
 	}
 	

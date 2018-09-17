@@ -15,7 +15,7 @@ public class CustomerStatusDAO extends DAOService<CustomerStatusDB> {
 	private static final int STATUS_CURRENT = 2;
 	private static final int STATUS_NONACTIVE = 3;
 
-	public CustomerStatusDAO(CustomerCoreSessionProvider sessionProvider) {
+	public CustomerStatusDAO(HibernateSessionProvider sessionProvider) {
 		super(sessionProvider, CustomerStatusDB.class);
 	}
 
