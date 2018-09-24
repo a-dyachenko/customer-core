@@ -1,6 +1,7 @@
 package customer_core.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import customers_core.dao.CommentDAO;
 import customers_core.dao.CustomerDAO;
@@ -52,11 +53,11 @@ public class CustomerDataService {
 		return customerDAO.get(customerId);
 	}
 
-	public ArrayList<CustomerStatusDB> getCustomerStatuses() {
+	public List<CustomerStatusDB> getCustomerStatuses() {
 		return this.customerStatusDAO.getCustomerStatuses();
 	}
 
-	public ArrayList<CustomerDB> getAllCustomers() {
+	public List<CustomerDB> getAllCustomers() {
 		return customerDAO.getAllCustomers();
 	}
 
@@ -64,7 +65,7 @@ public class CustomerDataService {
 		this.commentDAO.save(comment);
 	}
 
-	public ArrayList<CommentDB> getCommentsForCustomer(CustomerDB customer) {
+	public List<CommentDB> getCommentsForCustomer(CustomerDB customer) {
 		return this.commentDAO.getCommentsForCustomer(customer);
 	}
 }

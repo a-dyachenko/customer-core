@@ -20,7 +20,7 @@ public class CommentDAO extends DAOService<CommentDB> {
 		super(sessionProvider, CommentDB.class);
 	}
 
-	public ArrayList<CommentDB> getCommentsForCustomer(CustomerDB customer) {
+	public List<CommentDB> getCommentsForCustomer(CustomerDB customer) {
 
 		CriteriaQuery<CommentDB> criteriaQuery = getCriteriaBuilder().createQuery(CommentDB.class);
 		Root<CommentDB> root = criteriaQuery.from(CommentDB.class);
@@ -34,7 +34,7 @@ public class CommentDAO extends DAOService<CommentDB> {
 		 
 		Query query = getCurrentSession().createQuery(criteriaQuery);
 		@SuppressWarnings("unchecked")
-		ArrayList<CommentDB> customerComments = (ArrayList<CommentDB>) query.getResultList();
+		List<CommentDB> customerComments = (List<CommentDB>) query.getResultList();
 
 		return customerComments;
 	}

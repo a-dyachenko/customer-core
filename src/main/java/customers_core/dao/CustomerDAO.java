@@ -1,6 +1,6 @@
 package customers_core.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,14 +14,14 @@ public class CustomerDAO extends DAOService<CustomerDB> {
 		super(sessionProvider, CustomerDB.class);
 	}
 	
-	public ArrayList<CustomerDB> getAllCustomers() {
+	public List<CustomerDB> getAllCustomers() {
 		
 		CriteriaQuery<CustomerDB> criteriaQuery = getCriteriaBuilder().createQuery(CustomerDB.class);
 		Root<CustomerDB> root = criteriaQuery.from(CustomerDB.class);
 		criteriaQuery.select(root);
 		Query query = getCurrentSession().createQuery(criteriaQuery);
 		@SuppressWarnings("unchecked")
-		ArrayList<CustomerDB> customerStatuses = (ArrayList<CustomerDB>) query.getResultList();
+		List<CustomerDB> customerStatuses = (List<CustomerDB>) query.getResultList();
 		
 		return customerStatuses; 
 	}

@@ -1,6 +1,6 @@
 package dao.test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class CustomerDAOTest extends BaseTest {
 	
 	@Test
 	public void getCustomerStatusesTest() {
-		ArrayList<CustomerStatusDB> customerStatuses = this.customerStatusDAO.getCustomerStatuses();
+		List<CustomerStatusDB> customerStatuses = this.customerStatusDAO.getCustomerStatuses();
 		Assert.assertNotNull("customer statuses loaded", customerStatuses);
 		Assert.assertEquals("3 customer statuses found", 3, customerStatuses.size());
 	}
@@ -86,7 +86,7 @@ public class CustomerDAOTest extends BaseTest {
 		Assert.assertNotNull("comment saved with new id", comment1.getId());
 		Assert.assertNotNull("comment saved with new id", comment2.getId());
 
-		ArrayList<CommentDB> customerComments = commentDAO.getCommentsForCustomer(customer);
+		List<CommentDB> customerComments = commentDAO.getCommentsForCustomer(customer);
 		Assert.assertNotNull("comments found for customer", customerComments);
 		Assert.assertEquals("proper amount of comments found for customer", 2, customerComments.size());
 
