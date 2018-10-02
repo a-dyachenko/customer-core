@@ -4,30 +4,30 @@ import javax.persistence.criteria.CriteriaBuilder;
 
 import org.hibernate.Session;
 
-import customers_core.db.BaseObjectDB;
+import customers_core.db.BaseDBObject;
 
-public class DAOService<DAOClass extends BaseObjectDB> {
+public class DAOService<DBObject extends BaseDBObject> {
 
-	Class<DAOClass> cl;
+	Class<DBObject> cl;
 	private HibernateSessionProvider sessionProvider;
 	private CriteriaBuilder criteriaBuilder;
 
-	public DAOService(HibernateSessionProvider sessionProvider, Class<DAOClass> cl) {
+	public DAOService(HibernateSessionProvider sessionProvider, Class<DBObject> cl) {
 		this.sessionProvider = sessionProvider;
 		this.cl = cl;
 	}
 
-	public void save(final DAOClass object) {
+	public void save(final DBObject object) {
 		sessionProvider.getSession().saveOrUpdate(object);
 	}
 
-	public DAOClass get(final int id) {
+	public DBObject get(final int id) {
 
-		DAOClass daoClass = (DAOClass) sessionProvider.getSession().get(cl, id);
+		DBObject daoClass = (DBObject) sessionProvider.getSession().get(cl, id);
 		return daoClass;
 	}
 	
-	public void delete(final DAOClass object) {
+	public void delete(final DBObject object) {
 		sessionProvider.getSession().delete(object);
 	}
 

@@ -33,6 +33,7 @@ public class CustomerDAOTest extends BaseTest {
 		customerStatus = this.customerStatusDAO.getCustomerStatusByName(STATUS_CURRENT);
 		Assert.assertNotNull("status loaded", customerStatus);
 		Assert.assertEquals("status match", STATUS_CURRENT, customerStatus.getStatusName());
+		logger.info("test complete ");
 	}
 	
 	@Test

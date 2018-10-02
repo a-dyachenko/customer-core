@@ -12,8 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="customer")
-public class CustomerDB extends BaseObjectDB {
+@Table(name = "customer")
+public class CustomerDB extends BaseDBObject {
 
 	private int id;
 	private CustomerStatusDB customerStatus;
@@ -35,7 +35,7 @@ public class CustomerDB extends BaseObjectDB {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="customer_status")
+	@JoinColumn(name = "customer_status")
 	public CustomerStatusDB getCustomerStatus() {
 		return customerStatus;
 	}
@@ -44,7 +44,7 @@ public class CustomerDB extends BaseObjectDB {
 		this.customerStatus = customerStatus;
 	}
 
-	@Column(name="customer_firstname")
+	@Column(name = "customer_firstname")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -52,7 +52,8 @@ public class CustomerDB extends BaseObjectDB {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	@Column(name="customer_lastname")
+
+	@Column(name = "customer_lastname")
 	public String getLastName() {
 		return lastName;
 	}
@@ -61,7 +62,7 @@ public class CustomerDB extends BaseObjectDB {
 		this.lastName = lastName;
 	}
 
-	@Column(name="customer_address")
+	@Column(name = "customer_address")
 	public String getCustomerAddress() {
 		return customerAddress;
 	}
@@ -70,7 +71,7 @@ public class CustomerDB extends BaseObjectDB {
 		this.customerAddress = customerAddress;
 	}
 
-	@Column(name="customer_phone")
+	@Column(name = "customer_phone")
 	public String getCustomerPhone() {
 		return customerPhone;
 	}
@@ -79,7 +80,7 @@ public class CustomerDB extends BaseObjectDB {
 		this.customerPhone = customerPhone;
 	}
 
-	@Column(name="created")
+	@Column(name = "created")
 	public Date getCreated() {
 		return created;
 	}

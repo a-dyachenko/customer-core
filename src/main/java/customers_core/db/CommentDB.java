@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="customer_comment")
-public class CommentDB extends BaseObjectDB {
+public class CommentDB extends BaseDBObject {
 
 	private int id;
 	private CustomerDB customer;

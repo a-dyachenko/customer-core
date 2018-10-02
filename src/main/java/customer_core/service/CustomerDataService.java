@@ -1,18 +1,19 @@
 package customer_core.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import customers_core.dao.CommentDAO;
+import customers_core.dao.CustomerCoreSessionProvider;
 import customers_core.dao.CustomerDAO;
 import customers_core.dao.CustomerStatusDAO;
 import customers_core.dao.HibernateSessionProvider;
-import customers_core.dao.CustomerCoreSessionProvider;
 import customers_core.db.CommentDB;
 import customers_core.db.CustomerDB;
 import customers_core.db.CustomerStatusDB;
+
 /**
- * wrapper / service "API" class for DAO services 
+ * wrapper / service "API" class for DAO services
+ * 
  * @author pwner
  *
  */
@@ -32,20 +33,20 @@ public class CustomerDataService {
 		customerStatusDAO = new CustomerStatusDAO(sessionProvider);
 		customerDAO = new CustomerDAO(sessionProvider);
 	}
-	
+
 	/**
 	 * constructor for custom session provider
+	 * 
 	 * @param sessionProvider
 	 */
 	public CustomerDataService(HibernateSessionProvider sessionProvider) {
- 
+
 		commentDAO = new CommentDAO(sessionProvider);
 		customerStatusDAO = new CustomerStatusDAO(sessionProvider);
 		customerDAO = new CustomerDAO(sessionProvider);
 	}
 
 	public void saveCustomer(CustomerDB customer) {
-
 		customerDAO.save(customer);
 	}
 
