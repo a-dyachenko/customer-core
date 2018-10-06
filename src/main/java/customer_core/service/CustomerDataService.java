@@ -3,7 +3,6 @@ package customer_core.service;
 import java.util.List;
 
 import customers_core.dao.CommentDAO;
-import customers_core.dao.CustomerCoreSessionProvider;
 import customers_core.dao.CustomerDAO;
 import customers_core.dao.CustomerStatusDAO;
 import customers_core.dao.HibernateSessionProvider;
@@ -26,12 +25,9 @@ public class CustomerDataService {
 	/**
 	 * default constructor
 	 */
-	public CustomerDataService() {
 
-		CustomerCoreSessionProvider sessionProvider = new CustomerCoreSessionProvider();
-		commentDAO = new CommentDAO(sessionProvider);
-		customerStatusDAO = new CustomerStatusDAO(sessionProvider);
-		customerDAO = new CustomerDAO(sessionProvider);
+	public static CustomerDataService getCustomerDataService(HibernateSessionProvider sessionProvider) {
+		return new CustomerDataService(sessionProvider);
 	}
 
 	/**
@@ -39,7 +35,7 @@ public class CustomerDataService {
 	 * 
 	 * @param sessionProvider
 	 */
-	public CustomerDataService(HibernateSessionProvider sessionProvider) {
+	private CustomerDataService(HibernateSessionProvider sessionProvider) {
 
 		commentDAO = new CommentDAO(sessionProvider);
 		customerStatusDAO = new CustomerStatusDAO(sessionProvider);

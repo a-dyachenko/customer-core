@@ -18,20 +18,16 @@ public class HibernateUtil {
 	public static SessionFactory getSessionFactory() {
 
 		if (sessionFactory == null) {
-			try {
-				// Create registry
+			try { 
 				registry = new StandardServiceRegistryBuilder().configure().build();
-
-				// Create MetadataSources
+ 
 				MetadataSources sources = new MetadataSources(registry);
 				sources.addAnnotatedClass(CustomerStatusDB.class);
 				sources.addAnnotatedClass(CommentDB.class);
 				sources.addAnnotatedClass(CustomerDB.class);
-
-				// Create Metadata
+ 
 				Metadata metadata = sources.getMetadataBuilder().build();
-
-				// Create SessionFactory
+ 
 				sessionFactory = metadata.getSessionFactoryBuilder().build();
 
 			} catch (Exception e) {
