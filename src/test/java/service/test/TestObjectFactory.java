@@ -7,7 +7,7 @@ public class TestObjectFactory {
 	public TestObjectFactory() {
 	}
 
-	public static class CustomerDBFactory {
+	public static class Customers {
 
 		public static CustomerDB getTestCustomerObject(CustomerStatusDB status) {
 
@@ -23,12 +23,20 @@ public class TestObjectFactory {
 		}
 	}
 
-	public static class CustomerStatusDBFactory {
+	public static class CustomerStatuses {
 
 		private static final String CUSTOMER_STATUS_CURRENT = "current";
 		private static final String CUSTOMER_STATUS_NONACTIVE = "non-active";
 		private static final String CUSTOMER_STATUS_PROSPECTIVE = "prospective";
 
+		public static CustomerStatusDB getStatusProspective() {
+
+			CustomerStatusDB statusCurrent = new CustomerStatusDB();
+			statusCurrent.setId(1);
+			statusCurrent.setStatusName(CUSTOMER_STATUS_PROSPECTIVE);
+			return statusCurrent;
+		}
+		
 		public static CustomerStatusDB getStatusCurrent() {
 
 			CustomerStatusDB statusCurrent = new CustomerStatusDB();
@@ -45,12 +53,6 @@ public class TestObjectFactory {
 			return statusCurrent;
 		}
 
-		public static CustomerStatusDB getStatusProspective() {
-
-			CustomerStatusDB statusCurrent = new CustomerStatusDB();
-			statusCurrent.setId(1);
-			statusCurrent.setStatusName(CUSTOMER_STATUS_PROSPECTIVE);
-			return statusCurrent;
-		}
+		
 	}
 }

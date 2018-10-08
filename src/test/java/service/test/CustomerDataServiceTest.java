@@ -9,8 +9,9 @@ import customer_core.service.CustomerDataService;
 import customers_core.dao.CustomerCoreSessionProvider;
 import customers_core.db.CommentDB;
 import customers_core.db.CustomerDB;
+import customers_core.db.CustomerStatusDB;
 import dao.test.BaseTest;
-import service.test.TestObjectFactory.CustomerStatusDBFactory;
+import service.test.TestObjectFactory.CustomerStatuses;
 
 public class CustomerDataServiceTest extends BaseTest {
 
@@ -22,14 +23,13 @@ public class CustomerDataServiceTest extends BaseTest {
 	public void saveCustomerTest() {
 		CustomerDataService customerDataService = CustomerDataService
 				.getCustomerDataService(new CustomerCoreSessionProvider());
-		saveAndLoadCustomer(customerDataService);
+		saveAndLoadCustomerCurrent(customerDataService);
 
 	}
 
-	private CustomerDB saveAndLoadCustomer(CustomerDataService customerDataService) {
+	private CustomerDB saveAndLoadCustomerCurrent(CustomerDataService customerDataService) {
 
-		CustomerDB newCustomer = TestObjectFactory.CustomerDBFactory
-				.getTestCustomerObject(CustomerStatusDBFactory.getStatusCurrent());
+		CustomerDB newCustomer = TestObjectFactory.Customers.getTestCustomerObject(CustomerStatuses.getStatusCurrent());
 
 		customerDataService.saveCustomer(newCustomer);
 
@@ -58,16 +58,16 @@ public class CustomerDataServiceTest extends BaseTest {
 		CustomerDataService customerDataService = CustomerDataService
 				.getCustomerDataService(new CustomerCoreSessionProvider());
 
-		CustomerDB newCustomer1 = TestObjectFactory.CustomerDBFactory
-				.getTestCustomerObject(CustomerStatusDBFactory.getStatusCurrent());
+		CustomerDB newCustomer1 = TestObjectFactory.Customers
+				.getTestCustomerObject(CustomerStatuses.getStatusCurrent());
 		String testCustomer1FirstName = "test customer 1 first name";
 		String testCustomer1LastName = "test customer 1 last name";
 		newCustomer1.setFirstName(testCustomer1FirstName);
 		newCustomer1.setLastName(testCustomer1LastName);
 		customerDataService.saveCustomer(newCustomer1);
 
-		CustomerDB newCustomer2 = TestObjectFactory.CustomerDBFactory
-				.getTestCustomerObject(CustomerStatusDBFactory.getStatusCurrent());
+		CustomerDB newCustomer2 = TestObjectFactory.Customers
+				.getTestCustomerObject(CustomerStatuses.getStatusCurrent());
 		String testCustomer2FirstName = "test customer 2 first name";
 		String testCustomer2LastName = "test customer 2 last name";
 		newCustomer2.setFirstName(testCustomer2FirstName);
@@ -89,7 +89,7 @@ public class CustomerDataServiceTest extends BaseTest {
 
 		CustomerDataService customerDataService = CustomerDataService
 				.getCustomerDataService(new CustomerCoreSessionProvider());
-		CustomerDB newCustomer = saveAndLoadCustomer(customerDataService);
+		CustomerDB newCustomer = saveAndLoadCustomerCurrent(customerDataService);
 		String commentText = "text \n text";
 		CommentDB newComment = new CommentDB(newCustomer, commentText);
 		customerDataService.saveComment(newComment);
@@ -112,15 +112,62 @@ public class CustomerDataServiceTest extends BaseTest {
 	@Test
 	public void getCustomerByIdTest() {
 
+		CustomerDataService customerDataService = CustomerDataService
+				.getCustomerDataService(new CustomerCoreSessionProvider());
+		CustomerDB savedCustomer = saveAndLoadCustomerCurrent(customerDataService);
+		int customerId = savedCustomer.getId();
+
+		CustomerDB getCustomerById = customerDataService.getCustomerById(customerId);
+		Assert.assertTrue("customer match", getCustomerById.getId() == savedCustomer.getId());
+
 	}
 
 	@Test
 	public void getCustomerStatuesTest() {
 
+		CustomerDataService customerDataService = CustomerDataService
+				.getCustomerDataService(new CustomerCoreSessionProvider());
+		List<CustomerStatusDB> customerStatuses = customerDataService.getCustomerStatuses();
+
+		CustomerStatusDB statusCurrent = TestObjectFactory.CustomerStatuses.getStatusCurrent();
+		CustomerStatusDB statusProspective = TestObjectFactory.CustomerStatuses.getStatusProspective();
+		CustomerStatusDB statusNonActive = TestObjectFactory.CustomerStatuses.getStatusNonActive();
+
+		this.logger.info("statuses " + customerStatuses);
+
+		boolean containsStatusCurrent = false;
+		boolean containsStatusProspective = false;
+		boolean containsStatusNonActive = false;
+
+		for (CustomerStatusDB status : customerStatuses) {
+
+			int statusId = status.getId();
+			String statusName = status.getStatusName();
+			if (statusId == statusCurrent.getId() && statusCurrent.getStatusName().equals(statusName))
+				containsStatusCurrent = true;
+			if (statusId == statusProspective.getId() && statusProspective.getStatusName().equals(statusName))
+				containsStatusProspective = true; 
+			if (statusId == statusNonActive.getId() && statusNonActive.getStatusName().equals(statusName))
+				containsStatusNonActive = true;
+
+		}
+
+		Assert.assertTrue("statuses contain current", containsStatusCurrent);
+		Assert.assertTrue("statuses contain prospective ", containsStatusProspective);
+		Assert.assertTrue("statuses contain nonactive",containsStatusNonActive);
+
 	}
 
 	@Test
 	public void saveCommentTest() {
+		
+		CustomerDataService customerDataService = CustomerDataService
+				.getCustomerDataService(new CustomerCoreSessionProvider());
+		CustomerDB newCustomer = saveAndLoadCustomerCurrent(customerDataService);
+		String commentText = "text \n text";
+		CommentDB newComment = new CommentDB(newCustomer, commentText);
+		customerDataService.saveComment(newComment);
+		Assert.assertNotNull(newComment.getId());
 
 	}
 

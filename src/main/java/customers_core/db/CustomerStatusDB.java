@@ -35,5 +35,10 @@ public class CustomerStatusDB extends BaseDBObject {
 	}
 
 
-
+	@Override
+	public String toString() {
+		return "status id = " + this.id + " status name = " + this.statusName;
+		
+	}
+	
 }
