@@ -1,5 +1,6 @@
 package customer_core.service;
 
+import java.util.Date;
 import java.util.List;
 
 import customers_core.dao.CommentDAO;
@@ -43,6 +44,7 @@ public class CustomerDataService {
 	}
 
 	public void saveCustomer(CustomerDB customer) {
+		customer.setCreated(new Date());
 		customerDAO.save(customer);
 	}
 
@@ -59,6 +61,7 @@ public class CustomerDataService {
 	}
 
 	public void saveComment(CommentDB comment) {
+		comment.setCreated(new Date());
 		this.commentDAO.save(comment);
 	}
 
