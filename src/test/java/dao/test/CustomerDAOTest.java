@@ -87,7 +87,7 @@ public class CustomerDAOTest extends BaseTest {
 		Assert.assertNotNull("comment saved with new id", comment1.getId());
 		Assert.assertNotNull("comment saved with new id", comment2.getId());
 
-		List<CommentDB> customerComments = commentDAO.getCommentsForCustomer(customer);
+		List<CommentDB> customerComments = commentDAO.getCommentsForCustomer(customer.getId());
 		Assert.assertNotNull("comments found for customer", customerComments);
 		Assert.assertEquals("proper amount of comments found for customer", 2, customerComments.size());
 

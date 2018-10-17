@@ -94,7 +94,7 @@ public class CustomerDataServiceTest extends BaseTest {
 		CommentDB newComment = new CommentDB(newCustomer, commentText);
 		customerDataService.saveComment(newComment);
 		Assert.assertNotNull(newComment.getId());
-		List<CommentDB> loadedComments = customerDataService.getCustomerComments(newCustomer);
+		List<CommentDB> loadedComments = customerDataService.getCustomerComments(newCustomer.getId());
 		Assert.assertTrue("contains comment for customer", loadedComments.contains(newComment));
 
 		CommentDB loadedComment = null;

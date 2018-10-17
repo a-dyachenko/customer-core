@@ -20,7 +20,7 @@ public class CommentDAO extends DAOService<CommentDB> {
 		super(sessionProvider, CommentDB.class);
 	}
 
-	public List<CommentDB> getCommentsForCustomer(CustomerDB customer) {
+	public List<CommentDB> getCommentsForCustomer(int customerId) {
 
 		CriteriaQuery<CommentDB> criteriaQuery = getCriteriaBuilder().createQuery(CommentDB.class);
 		Root<CommentDB> root = criteriaQuery.from(CommentDB.class);
@@ -29,7 +29,7 @@ public class CommentDAO extends DAOService<CommentDB> {
 
 		orderList.add(getCriteriaBuilder().desc(root.get(FIELD_CREATED))); 
 		
-		criteriaQuery.select(root).where(getCriteriaBuilder().equal(root.get(FIELD_CUSTOMER), customer))
+		criteriaQuery.select(root).where(getCriteriaBuilder().equal(root.get(FIELD_CUSTOMER), customerId))
 				.orderBy(orderList);
 		 
 		Query query = getCurrentSession().createQuery(criteriaQuery);
