@@ -62,7 +62,7 @@ public class CustomerDataService {
 		this.commentDAO.save(comment);
 	}
 
-	public List<CommentDB> getCommentsForCustomer(CustomerDB customer) {
+	public List<CommentDB> getCustomerComments(CustomerDB customer) {
 		return this.commentDAO.getCommentsForCustomer(customer);
 	}
 }

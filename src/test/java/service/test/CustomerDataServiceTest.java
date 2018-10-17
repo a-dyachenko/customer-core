@@ -85,7 +85,7 @@ public class CustomerDataServiceTest extends BaseTest {
 	}
 
 	@Test
-	public void getCommentsForCustomerTest() {
+	public void getCustomerCommentsTest() {
 
 		CustomerDataService customerDataService = CustomerDataService
 				.getCustomerDataService(new CustomerCoreSessionProvider());
@@ -94,7 +94,7 @@ public class CustomerDataServiceTest extends BaseTest {
 		CommentDB newComment = new CommentDB(newCustomer, commentText);
 		customerDataService.saveComment(newComment);
 		Assert.assertNotNull(newComment.getId());
-		List<CommentDB> loadedComments = customerDataService.getCommentsForCustomer(newCustomer);
+		List<CommentDB> loadedComments = customerDataService.getCustomerComments(newCustomer);
 		Assert.assertTrue("contains comment for customer", loadedComments.contains(newComment));
 
 		CommentDB loadedComment = null;
@@ -146,7 +146,7 @@ public class CustomerDataServiceTest extends BaseTest {
 			if (statusId == statusCurrent.getId() && statusCurrent.getStatusName().equals(statusName))
 				containsStatusCurrent = true;
 			if (statusId == statusProspective.getId() && statusProspective.getStatusName().equals(statusName))
-				containsStatusProspective = true; 
+				containsStatusProspective = true;
 			if (statusId == statusNonActive.getId() && statusNonActive.getStatusName().equals(statusName))
 				containsStatusNonActive = true;
 
@@ -154,13 +154,13 @@ public class CustomerDataServiceTest extends BaseTest {
 
 		Assert.assertTrue("statuses contain current", containsStatusCurrent);
 		Assert.assertTrue("statuses contain prospective ", containsStatusProspective);
-		Assert.assertTrue("statuses contain nonactive",containsStatusNonActive);
+		Assert.assertTrue("statuses contain nonactive", containsStatusNonActive);
 
 	}
 
 	@Test
 	public void saveCommentTest() {
-		
+
 		CustomerDataService customerDataService = CustomerDataService
 				.getCustomerDataService(new CustomerCoreSessionProvider());
 		CustomerDB newCustomer = saveAndLoadCustomerCurrent(customerDataService);
